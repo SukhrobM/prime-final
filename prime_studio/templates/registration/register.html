@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    {% load static %}
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale-1">
+    <title>Prime Studio | Регистрация</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@docsearch/css@3">
+
+<!--font-->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap" rel="stylesheet">
+
+<!--bootstrap-->
+    <link rel="stylesheet" href="{% static 'bootstrap/css/bootstrap.min.css' %}">
+    <script src="{% static 'bootstrap/js/bootstrap.min.js' %}"></script>
+
+<!--style-->
+    <link rel="stylesheet" href="{% static 'decoration/style.css' %}">
+    <link href="carousel.css" rel="stylesheet">
+    <style>
+        body {
+                font-family: "Barlow Condensed", sans-serif;
+              }
+
+        h1, h2, h3, h4, h5, h6 {
+                font-family: "Barlow Condensed", sans-serif;
+                font-weight: 700;
+               }
+
+        .carousel-caption {
+                position: absolute;
+                top: 50%;
+                left: 50%;
+                transform: translate(-50%, -50%);
+                text-align: center;
+              }
+        .carousel-item {
+                height: 600px;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+              }
+        .carousel-item img {
+                object-fit: cover;
+                height: 100%;
+                width: 100%;
+              }
+    </style>
+
+</head>
+<body class="align-items-canter p-5 bg-secondary text-center">
+{% csrf_token %}
+    <div class="container-md px-4 text-center">
+        <div class="form-float bg-secondary-subtle px-5 py-3 rounded-5 w-50 position-absolute start-50 top-50 translate-middle">
+            <h1 class="h3 mb-3 fw-normal">Регистрация</h1>
+            <main class="form-signin">
+                <form method="post">
+                        <div class="form-floating">
+                            <input type="text" name="username"  class="form-control username" maxlength="150" autofocus required
+                                   id="id_username" placeholder="Pasha">
+                            <label for="id_username">Имя пользователя</label>
+                            <p>Обязательное поле. Не более 150 символов. Только буквы,цифры и символы "@", ".", "+", "-", "_"</p>
+                        </div>
+                        <div class="form-floating">
+                            <input type="email" name="email" maxlength="320" required id="id_email" class="form-control" placeholder="name@example.com">
+                            <label for="id_email">Введите адрес почты</label>
+                        </div>
+                        <div class="form-floating">
+                            <input type="password" name="password1" autocomplete="new-password" aria-describedby="id_password1_helptext"
+                                   class="form-control" id="id_password1" placeholder="password">
+                            <label for="id_password1">Введите пароль</label>
+                            <span class="helptext" id="id_password1_helptext"></span>
+                            <ul>
+                                <li>Пароль не должен быть слишком похож на другую вашу личную информацию.</li>
+                                <li>Ваш пароль должен содержать как минимум 8 символов.</li>
+                                <li>Пароль не должен быть слишком простым и распространенным.</li>
+                                <li>Пароль не может состоять только из цифр.</li>
+                            </ul>
+                        </div>
+                        <div class="form-floating">
+                            <input type="password" name="password2" autocomplete="new-password" aria-describedby="id_password2_helptext"
+                                   class="form-control" id="id_password2" placeholder="password">
+                            <label for="id_password2">Повторите пароль</label>
+                            <p>Для подтверждения, пожалуйста, введите пароль еще раз</p>
+                        </div>
+                        <button class="btn btn-dark w-50 py-2" type="submit">Регистрация</button>
+                        <div class="d-block mt-2">
+                            <a class="btn btn-outline-secondary w-50 link-secondary link-underline link-underline-opacity-0 link-underline-opacity-0-hover" href="/">
+                                На главную
+                            </a>
+                        </div>
+
+                </form>
+            </main>
+        </div>
+    </div>
+</body>
+</html>

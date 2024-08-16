@@ -1,0 +1,328 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    {% load static %}
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale-1">
+    <title>Prime Studio | {{ level_categories.painting_level }}</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@docsearch/css@3">
+
+<!--font-->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap" rel="stylesheet">
+
+<!--bootstrap-->
+    <link rel="stylesheet" href="{% static 'bootstrap/css/bootstrap.min.css' %}">
+    <script src="{% static 'bootstrap/js/bootstrap.min.js' %}"></script>
+
+<!--style-->
+    <link rel="stylesheet" href="{% static 'decoration/style.css' %}">
+    <link href="carousel.css" rel="stylesheet">
+    <style>
+        body {
+                font-family: "Barlow Condensed", sans-serif;
+              }
+
+        h1, h2, h3, h4, h5, h6 {
+                font-family: "Barlow Condensed", sans-serif;
+                font-weight: 700;
+              }
+        .carousel-caption {
+                position: absolute;
+                top: 50%;
+                left: 50%;
+                transform: translate(-50%, -50%);
+                text-align: center;
+              }
+        .carousel-item {
+                height: 600px;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+              }
+        .carousel-item img {
+                object-fit: cover;
+                height: 100%;
+                width: 100%;
+              }
+    </style>
+
+</head>
+<body>
+{% csrf_token %}
+    <!--top-->
+    <div class="container px-0">
+        <!--header-->
+        <header class="py-3">
+
+            <div class="row flex-nowrap justify-content-between align-items-center pt-3">
+                <div class="col-4 mb-3 justify-content-between">
+                    <img src="{% static 'icons/twitter.png' %}" class="image-fluid m-2" alt="twitter">
+                    <img src="{% static 'icons/instagram.png' %}" class="image-fluid m-3" alt="twitter">
+                    <img src="{% static 'icons/facebook.png' %}" class="image-fluid" alt="twitter">
+                </div>
+                <div class="col-4 text-center mb-3">
+                    <a class="blog-header-logo text-body-emphasis text-decoration-none" href="/">
+                        <h2 class="fw-bold text-secondary">Prime Studio</h2>
+                    </a>
+                </div>
+                <div class="col-4 d-flex gap-3 justify-content-end align-items-center mb-3 pr-0">
+                    {% if user.is_authenticated %}
+                    <a class="link-underline link-underline-opacity-0 link-underline-opacity-0-hover"
+                       href="/logout"><h6 class="text-secondary">Выйти</h6></a>
+                    {% else %}
+                    <a class="link-underline link-underline-opacity-0 link-underline-opacity-0-hover"
+                       href="/accounts/login"><h6 class="text-secondary">Войти</h6></a>
+                    <a class="link-underline link-underline-opacity-0 link-underline-opacity-0-hover"
+                       href="/register"><h6 class="text-secondary">Регистрация</h6></a>
+                    {% endif %}
+                </div>
+            </div>
+
+        </header>
+        <!--categories-->
+        <div class="nav-scroller py-1 px-5 mb-3">
+
+            <nav class="nav nav-underline justify-content-between">
+                {% for c in categories %}
+                <a class="nav-item nav-link link-body-emphasis link-underline link-underline-opacity-0 link-underline-opacity-0-hover"
+                   href="{% url 'categories' c.id %}" style="opacity: 0.6;"><p class="fw-bold">{{ c.navigation_title }}</p></a>
+                {% endfor %}
+            </nav>
+
+        </div>
+
+    </div>
+
+    <!--main-->
+    <main>
+
+        <div class="text-center mb-5">
+            <h1 class="fw-bold text-secondary mb-2">{{ level_categories.painting_level }}</h1>
+            {% if level_categories.id == 1 %}
+            <img src="{% static 'navigation/titlebar-bronze.png' %}" alt="{{ exact_category.navigation_title }}">
+            {% elif level_categories.id == 2 %}
+            <img src="{% static 'navigation/page-title-bar-silver.png' %}" alt="{{ exact_category.navigation_title }}">
+            {% elif level_categories.id == 3 %}
+            <img src="{% static 'navigation/page-title-bar-gold.png' %}" alt="{{ exact_category.navigation_title }}">
+            {% endif %}
+        </div>
+
+        <div class="d-block text-center mb-5">
+            <h2 class="fw-bold text-secondary">Что вас ожидает</h2>
+        </div>
+
+            <!--services-->
+            <!--bronze-->
+            {% if level_categories.id == 1 %}
+            <div class="container marketing">
+                <div class="row featurette">
+                    <div class="col-md-7 d-flex flex-column justify-content-center">
+                        <h2 class="featurette-heading fw-normal lh-1">Чистый и равномерный покрас.</h2>
+                        <p class="lead">Вы можете рассчитывать на гарантированно гладкую поверхность всех моделей,
+                                        а также на дополнительное зенитное освещение базовых цветов по запросу.
+                                        Вы не обнаружите пятен, неравномерных слоев или модельной грунтовки,
+                                        проступающей в труднодоступных местах.</p>
+                    </div>
+                    <div class="col-md-5">
+                        <img src="{% static 'pics/1-WHAT-TO-EXPECT-600x600.jpg' %}" alt="">
+                    </div>
+                </div>
+            </div>
+            <hr class="featurette-divider">
+            <div class="container marketing">
+                <div class="row featurette">
+                    <div class="col-md-7 order-md-2 d-flex flex-column justify-content-center pr-md-4 col-md col-lg">
+                        <h2 class="featurette-heading fw-normal lh-1">Полное выделение.</h2>
+                        <p class="lead">Даже на нашем минимальном уровне все края будут выделены хайлайтами в стиле
+                                        бокс-арт, а все линзы, экраны и другие мелкие детали будут полностью окрашены и
+                                        захайлачены в соответствии со стандартом премиум-класса с любыми необходимыми
+                                        точками источника света, если потребуется.</p>
+                    </div>
+                    <div class="col-md-5 order-md-1 col-md col-lg">
+                        <img src="{% static 'pics/bronze.jpg' %}" class="image-fluid" alt="">
+                    </div>
+                </div>
+            </div>
+            <hr class="featurette-divider">
+            <div class="container marketing">
+                <div class="row featurette">
+                    <div class="col-md-7 d-flex flex-column justify-content-center">
+                        <h2 class="featurette-heading fw-normal lh-1">Мелкие детали.<br> Большая разница.</h2>
+                        <p class="lead">Внимание к деталям является ключом к покраске премиум-класса, поэтому такие детали,
+                            как печати чистоты, страницы книг и свитки, всегда будут включать в себя текст на любом уровне покраски.
+                            Вдобавок ко всему, любые лица будут полностью дополнены выделением и затенением,
+                            а также другими полностью нарисованными деталями, такими как глаза, зубы и языки, когда это необходимо.</p>
+                    </div>
+                    <div class="col-md-5">
+                        <img src="{% static 'pics/3-WHAT-TO-EXPECT-600x600.jpg' %}" alt="">
+                    </div>
+                </div>
+            </div>
+            <!--silver-->
+            {% elif level_categories.id == 2 %}
+            <div class="container marketing">
+                <div class="row featurette">
+                    <div class="col-md-7 d-flex flex-column justify-content-center">
+                        <h2 class="featurette-heading fw-normal lh-1">Самый популярный уровень.</h2>
+                        <p class="lead">Серебряный уровень — это самый простой способ приобрести выставочную миниатюру от нашей студии,
+                                        и он особенно популярен для индивидуальных моделей персонажей. Однако мы также
+                                        часто выполняем проекты полных армий на нашем Серебряном уровне, если
+                                        вам нужна особенно ошеломляющая полная армия.</p>
+                    </div>
+                    <div class="col-md-5">
+                        <img src="{% static 'pics/1-WHAT-TO-EXPECT-SILVER-600x600.jpg' %}" alt="">
+                    </div>
+                </div>
+            </div>
+            <hr class="featurette-divider">
+            <div class="container marketing">
+                <div class="row featurette">
+                    <div class="col-md-7 order-md-2 d-flex flex-column justify-content-center pr-md-4 col-md col-lg">
+                        <h2 class="featurette-heading fw-normal lh-1">Выделяйтесь.</h2>
+                        <p class="lead">Наряду со всеми ранее упомянутыми деталями на нашем Бронзовом уровне,
+                                        миниатюрам на нашем Серебряном уровне покраски будут даны дополнительные этапы хайлайтов,
+                                        чтобы они выделялись из толпы. Серебряный уровень также предоставляет возможности для более
+                                        продвинутых техник, включая полосы опасности, боевые повреждения, выветривание, силовые мечи
+                                        со смешанными кистями, освещение от источника объектов и многое другое</p>
+                    </div>
+                    <div class="col-md-5 order-md-1 col-md col-lg">
+                        <img src="{% static 'pics/2-WHAT-TO-EXPECT-SILVER-600x600.jpg' %}" class="image-fluid" alt="">
+                    </div>
+                </div>
+            </div>
+            <hr class="featurette-divider">
+            <div class="container marketing">
+                <div class="row featurette">
+                    <div class="col-md-7 d-flex flex-column justify-content-center">
+                        <h2 class="featurette-heading fw-normal lh-1">Мелкие детали.<br> Большая разница.</h2>
+                        <p class="lead">Серебряный — это наш минимальный уровень окраски для любой отдельной модели персонажа.
+                                        Наша команда — специалисты по персонажам, то есть они рисуют модели персонажей
+                                        по определенному стандарту с определенным уровнем детализации, который не совсем
+                                        соответствует нашему Бронзовому уровню.</p>
+                    </div>
+                    <div class="col-md-5">
+                        <img src="{% static 'pics/3-WHAT-TO-EXPECT-SILVER-600x600.jpg' %}" alt="">
+                    </div>
+                </div>
+            </div>
+            <hr class="featurette-divider">
+            <div class="container marketing">
+                <div class="row featurette">
+                    <div class="col-md-7 order-md-2 d-flex flex-column justify-content-center pr-md-4 col-md col-lg">
+                        <h2 class="featurette-heading fw-normal lh-1">Фокус.</h2>
+                        <p class="lead">Вдобавок ко всему, модели персонажей рисуются от начала до конца и не являются частью группы,
+                                        отряда или отряда, окрашенных в пакетном режиме. Это означает, что, как только
+                                        художник начнет работу над вашим персонажем, он посвятит ему все свое внимание,
+                                        пока он не будет закончен, прежде чем двигаться дальше.</p>
+                    </div>
+                    <div class="col-md-5 order-md-1 col-md col-lg">
+                        <img src="{% static 'pics/4-WHAT-TO-EXPECT-SILVER-600x600.jpg' %}" class="image-fluid" alt="">
+                    </div>
+                </div>
+            </div>
+            <!--gold-->
+            {% elif level_categories.id == 3 %}
+            <div class="container marketing">
+                <div class="row featurette">
+                    <div class="col-md-7 d-flex flex-column justify-content-center">
+                        <h2 class="featurette-heading fw-normal lh-1">Бокс-арт.</h2>
+                        <p class="lead">Производитель миниатюр премиум-класса тратит определенное количество времени на
+                                        каждую отдельную модель, когда дело доходит до создания изображений в бокс-арте,
+                                        и на нашем Золотом уровне окраски мы отразим этот уровень внимания, преданности
+                                        делу и заботы о выбранных вами моделях.</p>
+                    </div>
+                    <div class="col-md-5">
+                        <img src="{% static 'pics/1-WHAT-TO-EXPECT-GOLD-600x600.jpg' %}" alt="">
+                    </div>
+                </div>
+            </div>
+            <hr class="featurette-divider">
+            <div class="container marketing">
+                <div class="row featurette">
+                    <div class="col-md-7 order-md-2 d-flex flex-column justify-content-center pr-md-4 col-md col-lg">
+                        <h2 class="featurette-heading fw-normal lh-1">Подробная детализация.</h2>
+                        <p class="lead">Вы можете рассчитывать на до 4 уровней сложной подсветки для каждого цвета,
+                                        принимая во внимание тонкий контраст в естественно темных областях и яркость в
+                                        естественно более светлых областях.</p>
+                    </div>
+                    <div class="col-md-5 order-md-1 col-md col-lg">
+                        <img src="{% static 'pics/2-WHAT-TO-EXPECT-GOLD-600x600.jpg' %}" class="image-fluid" alt="">
+                    </div>
+                </div>
+            </div>
+            <hr class="featurette-divider">
+            <div class="container marketing">
+                <div class="row featurette">
+                    <div class="col-md-7 d-flex flex-column justify-content-center">
+                        <h2 class="featurette-heading fw-normal lh-1">Воплотите свое видение.<br> Большая разница.</h2>
+                        <p class="lead">Более тщательное и изысканное использование ранее упомянутых передовых методов,
+                                        таких как глэйзинг, смешивание и выветривание, можно использовать во время дополнительного времени,
+                                        потраченного на модель Золотого уровня, что поможет еще больше воплотить ваше видение в жизнь.</p>
+                    </div>
+                    <div class="col-md-5">
+                        <img src="{% static 'pics/3-WHAT-TO-EXPECT-GOLD-600x600.jpg' %}" alt="">
+                    </div>
+                </div>
+            </div>
+            {% endif %}
+
+    </main>
+
+    <!--footer-->
+    <div class="bg-dark">
+        <div class="container">
+
+            <footer class="text-light row row-cols-1 row-cols-sm-2 row-cols-md-5 py-4 mt-5">
+
+                <div class="col mb-3">
+                    <h5>Соцсети</h5>
+                    <img src="{% static 'icons/twitter.png' %}" class="image-fluid m-2" alt="twitter">
+                    <img src="{% static 'icons/instagram.png' %}" class="image-fluid m-3" alt="twitter">
+                    <img src="{% static 'icons/facebook.png' %}" class="image-fluid" alt="twitter">
+                </div>
+                <div class="col mb-3"></div>
+                <div class="col mb-3">
+                    <h5>Уровни покраса</h5>
+                    <ul class="nav flex-column">
+                        {% for l in level %}
+                        <li class="nav-item mb-2">
+                            <a href="{% url 'level' l.id%}" class="nav-link p-0 link-light">{{ l.painting_level }}</a>
+                        </li>
+                        {% endfor %}
+                    </ul>
+                </div>
+                <div class="col mb-3">
+                    <h5>Студия</h5>
+                    <ul class="nav flex-column">
+                        <li class="nav-item mb-2">
+                            <a href="{% url 'categories' 1 %}" class="nav-link p-0 text-light">О студии</a>
+                        </li>
+                        <li class="nav-item mb-2">
+                            <a href="{% url 'gallery' %}" class="nav-link p-0 text-light">Галерея</a>
+                        </li>
+                        <li class="nav-item mb-2">
+                            <a href="{% url 'terms' id=1 %}" class="nav-link p-0 text-light">Условия и положения</a>
+                        </li>
+                        <li class="nav-item mb-2">
+                            <a href="{% url 'terms' id=2 %}" class="nav-link p-0 text-light">Политика конфиденциальности</a>
+                        </li>
+                    </ul>
+                </div>
+
+            </footer>
+            <div class="py-4 text-center text-light">
+
+                <p>Build on <a class="text-light" href="https://getbootstrap.com/">Bootstrap</a> by <a class="text-light" href="https://twitter.com/mdo">@mdo</a>.</p>
+                <p class="mb-0">
+                    <a class="text-light" href="#">Back to top</a>
+                </p>
+
+            </div>
+
+        </div>
+    </div>
+
+</body>
+</html>

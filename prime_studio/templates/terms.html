@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    {% load static %}
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale-1">
+    <title>Prime Studio | {{ content.terms_title }}</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@docsearch/css@3">
+
+<!--font-->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap" rel="stylesheet">
+
+<!--bootstrap-->
+    <link rel="stylesheet" href="{% static 'bootstrap/css/bootstrap.min.css' %}">
+    <script src="{% static 'bootstrap/js/bootstrap.min.js' %}"></script>
+
+<!--style-->
+    <link rel="stylesheet" href="{% static 'decoration/style.css' %}">
+    <link href="carousel.css" rel="stylesheet">
+    <style>
+        body {
+                font-family: "Barlow Condensed", sans-serif;
+              }
+
+        h1, h2, h3, h4, h5, h6 {
+                font-family: "Barlow Condensed", sans-serif;
+                font-weight: 700;
+              }
+
+        .carousel-caption {
+                position: absolute;
+                top: 40%;
+                left: 50%;
+                transform: translate(-50%, -50%);
+                text-align: center;
+              }
+
+        .carousel-indicators [data-bs-target] {
+                width: 12px;
+                height: 12px;
+
+                border-radius: 50%;
+                outline: 1px solid #ffffff;
+                border: 0px;
+                background: transparent;
+              }
+        .carousel-indicators .active {
+                background-color: #ffffff;
+                outline: 2px solid #ffffff;
+              }
+    </style>
+
+<body>
+{% csrf_token %}
+    <!--top-->
+    <div class="container px-0 ">
+        <!--header-->
+        <header class="py-3">
+
+            <div class="row flex-nowrap justify-content-between align-items-center pt-3">
+                <div class="col-4 mb-3 justify-content-between">
+                    <img src="{% static 'icons/twitter.png' %}" class="image-fluid m-2" alt="twitter">
+                    <img src="{% static 'icons/instagram.png' %}" class="image-fluid m-3" alt="twitter">
+                    <img src="{% static 'icons/facebook.png' %}" class="image-fluid" alt="twitter">
+                </div>
+                <div class="col-4 text-center mb-3">
+                    <a class="blog-header-logo text-body-emphasis text-decoration-none" href="/">
+                        <h1 class="fw-bold text-secondary">Prime Studio</h1>
+                    </a>
+                </div>
+                <div class="col-4 d-flex gap-3 justify-content-end align-items-center mb-3 pr-0">
+                    {% if user.is_authenticated %}
+                    <a class="link-underline link-underline-opacity-0 link-underline-opacity-0-hover"
+                       href="/logout"><h6 class="text-secondary">Выйти</h6></a>
+                    {% else %}
+                    <a class="link-underline link-underline-opacity-0 link-underline-opacity-0-hover"
+                       href="/accounts/login"><h6 class="text-secondary">Войти</h6></a>
+                    <a class="link-underline link-underline-opacity-0 link-underline-opacity-0-hover"
+                       href="/register"><h6 class="text-secondary">Регистрация</h6></a>
+                    {% endif %}
+                </div>
+            </div>
+
+        </header>
+        <!--categories-->
+        <div class="nav-scroller py-1 px-5 mb-5">
+
+            <nav class="nav nav-underline justify-content-between">
+                {% for c in categories %}
+                <a class="nav-item nav-link link-body-emphasis link-underline link-underline-opacity-0 link-underline-opacity-0-hover"
+                   href="{% url 'categories' c.id %}" style="opacity: 0.6;"><p class="fw-bold">{{ c.navigation_title }}</p></a>
+                {% endfor %}
+            </nav>
+
+        </div>
+
+    </div>
+
+    <!--main-->
+    <main>
+
+        <div class="text-center mb-3">
+            <h1 class="fw-bold text-secondary mb-2">{{ content.terms_title }}</h1>
+
+            <div class="container text-center mb-3">
+                <div class="row py-lg-5">
+                <div class="col-lg-6 col-md-8 mx-auto">
+                    <p>{{ content.terms_content }}</p>
+                </div>
+            </div>
+            </div>
+        </div>
+
+        <!--carousel-->
+        <div id="myCarousel" class="carousel slide mb-5" data-bs-ride="carousel">
+            <!--indicators-->
+            <div class="carousel-indicators">
+                <button type="button" data-bs-target="#myCarousel" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+                <button type="button" data-bs-target="#myCarousel" data-bs-slide-to="1" aria-label="Slide 1"></button>
+                <button type="button" data-bs-target="#myCarousel" data-bs-slide-to="2" aria-label="Slide 1"></button>
+            </div>
+            <!--inner-->
+            <div class="carousel-inner">
+                <div class="carousel-item active">
+                    <svg class="bd-placeholder-img bd-placeholder-img-lg d-block w-100" width="800" height="300"
+                         xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: First slide" preserveAspectRatio="xMidYMid slice"
+                         focusable="false">
+                        <rect width="100%" height="100%" fill="var(--bs-secondary-color)"></rect>
+                    </svg>
+                    <!--content-->
+                    <div class="container">
+                        <div class="carousel-caption text-center">
+                            <h5>Модели, которые я заказал, на фотографиях выглядели потрясающе, но вживую еще лучше.
+                                Персонал удивительно дружелюбный и услужливый, даже когда я попросил внести правки позже</h5>
+                            <p class="opacity-75">Григорий, 24 Июля</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="carousel-item">
+                    <svg class="bd-placeholder-img bd-placeholder-img-lg d-block w-100" width="800" height="300"
+                         xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: First slide" preserveAspectRatio="xMidYMid slice"
+                         focusable="false">
+                        <rect width="100%" height="100%" fill="var(--bs-secondary-color)"></rect>
+                    </svg>
+                        <!--content-->
+                    <div class="container">
+                        <div class="carousel-caption text-center">
+                                <h5>Первоначально возникла проблема с адресом доставки, но, надо отдать им должное,
+                                    эта проблема была решена чрезвычайно быстро и эффективно, а личное обслуживание, во многом сделало их честь.</h5>
+                                <p>Joy Jackson, 11 Июля</p>
+                            </div>
+                    </div>
+                </div>
+                <div class="carousel-item">
+                    <svg class="bd-placeholder-img bd-placeholder-img-lg d-block w-100" width="800" height="300"
+                         xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: First slide" preserveAspectRatio="xMidYMid slice"
+                         focusable="false">
+                        <rect width="100%" height="100%" fill="var(--bs-secondary-color)"></rect>
+                    </svg>
+                    <!--content-->
+                    <div class="container">
+                        <div class="carousel-caption text-center">
+                            <h5>Когда дело дошло до общения со мной, они были информативными, эффективными и профессиональными,
+                                а также предоставили рофессиональные услуги по покраске. Я получила замечательный опыт и отличный конечный результат.</h5>
+                            <p>Ольга жданова 5 Апреля</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+    </main>
+
+    <!--footer-->
+    <div class="bg-dark">
+        <div class="container">
+
+            <footer class="text-light row row-cols-1 row-cols-sm-2 row-cols-md-5 py-4 mt-5">
+
+                <div class="col mb-3">
+                    <h5>Соцсети</h5>
+                    <img src="{% static 'icons/twitter.png' %}" class="image-fluid m-2" alt="twitter">
+                    <img src="{% static 'icons/instagram.png' %}" class="image-fluid m-3" alt="twitter">
+                    <img src="{% static 'icons/facebook.png' %}" class="image-fluid" alt="twitter">
+                </div>
+                <div class="col mb-3"></div>
+                <div class="col mb-3">
+                    <h5>Уровни покраса</h5>
+                    <ul class="nav flex-column">
+                        {% for l in level %}
+                        <li class="nav-item mb-2">
+                            <a href="{% url 'level' l.id%}" class="nav-link p-0 link-light">{{ l.painting_level }}</a>
+                        </li>
+                        {% endfor %}
+                    </ul>
+                </div>
+                <div class="col mb-3">
+                    <h5>Студия</h5>
+                    <ul class="nav flex-column">
+                        <li class="nav-item mb-2">
+                            <a href="{% url 'categories' 1 %}" class="nav-link p-0 text-light">О студии</a>
+                        </li>
+                        <li class="nav-item mb-2">
+                            <a href="{% url 'gallery' %}" class="nav-link p-0 text-light">Галерея</a>
+                        </li>
+                        <li class="nav-item mb-2">
+                            <a href="{% url 'terms' id=1 %}" class="nav-link p-0 text-light">Условия и положения</a>
+                        </li>
+                        <li class="nav-item mb-2">
+                            <a href="{% url 'terms' id=2 %}" class="nav-link p-0 text-light">Политика конфиденциальности</a>
+                        </li>
+                    </ul>
+                </div>
+
+            </footer>
+            <div class="py-4 text-center text-light">
+
+                <p>Build on <a class="text-light" href="https://getbootstrap.com/">Bootstrap</a> by <a class="text-light" href="https://twitter.com/mdo">@mdo</a>.</p>
+                <p class="mb-0">
+                    <a class="text-light" href="#">Back to top</a>
+                </p>
+
+            </div>
+
+        </div>
+    </div>
+
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.min.js"></script>
+</body>
+</html>
